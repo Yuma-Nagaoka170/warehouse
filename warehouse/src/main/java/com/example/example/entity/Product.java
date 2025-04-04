@@ -53,22 +53,39 @@
 
 package com.example.example.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@Table(name = "products")
 public class Product {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-    private String name;
-    private String description;
-    private Integer price;
-    private String imageUrl;
 
-    // Getters and Setters
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false, unique = true)
+    private String name;
+
+    @Column(nullable = false)
+    private String category;
+
+    @Column(nullable = false)
+    private String sku;  // 商品コード（SKU）
+
+    @Column(nullable = false)
+    private double price;
 }
 
 
