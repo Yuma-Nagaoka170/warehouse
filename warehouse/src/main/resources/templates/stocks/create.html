@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在庫登録</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>在庫を登録</h2>
+    <form th:action="@{/stocks/create}" th:object="${stock}" method="post">
+        <div class="mb-3">
+            <label for="product" class="form-label">商品</label>
+            <select class="form-select" th:field="*{product}" required>
+                <option th:each="product : ${products}"
+                        th:value="${product}" 
+                        th:text="${product.name}">商品</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="warehouse" class="form-label">倉庫</label>
+            <select class="form-select" th:field="*{warehouse}" required>
+                <option th:each="warehouse : ${warehouses}"
+                        th:value="${warehouse}" 
+                        th:text="${warehouse.name}">倉庫</option>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="quantity" class="form-label">数量</label>
+            <input type="number" class="form-control" th:field="*{quantity}" min="0" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">登録</button>
+        <a th:href="@{/}" class="btn btn-secondary">キャンセル</a>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>出荷作成</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4">出荷作成</h1>
+
+    <form action="/shipments/create" method="post" th:object="${shipment}">
+        <div class="mb-3">
+            <label for="status" class="form-label">ステータス</label>
+            <input type="text" class="form-control" id="status" th:field="*{status}" placeholder="例: SHIPPED">
+        </div>
+        <div class="mb-3">
+            <label for="order" class="form-label">注文ID</label>
+            <input type="number" class="form-control" id="order" th:field="*{order.id}" placeholder="例: 1">
+        </div>
+        <button type="submit" class="btn btn-success">作成</button>
+        <a href="/shipments" class="btn btn-secondary">戻る</a>
+    </form>
+</div>
+</body>
+</html>

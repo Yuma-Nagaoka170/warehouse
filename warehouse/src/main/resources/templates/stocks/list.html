@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>在庫一覧</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2 th:text="'倉庫: ' + ${warehouse.name} + ' の在庫一覧'"></h2>
+    <a th:href="@{/stocks/create}" class="btn btn-primary mb-3">在庫を追加</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>商品名</th>
+            <th>在庫数</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="stock : ${stocks}">
+            <td th:text="${stock.id}"></td>
+            <td th:text="${stock.product.name}"></td>
+            <td th:text="${stock.quantity}"></td>
+            <td>
+                <form th:action="@{|/stocks/delete/${stock.id}|}" method="post" style="display:inline;">
+                    <input type="hidden" name="warehouseId" th:value="${warehouse.id}" />
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('削除してよろしいですか？')">削除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
