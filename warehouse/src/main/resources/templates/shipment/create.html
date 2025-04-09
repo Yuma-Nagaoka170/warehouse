@@ -14,10 +14,15 @@
             <label for="status" class="form-label">ステータス</label>
             <input type="text" class="form-control" id="status" th:field="*{status}" placeholder="例: SHIPPED">
         </div>
-        <div class="mb-3">
-            <label for="order" class="form-label">注文ID</label>
-            <input type="number" class="form-control" id="order" th:field="*{order.id}" placeholder="例: 1">
-        </div>
+		<div class="mb-3">
+		        <label for="order" class="form-label">注文</label>
+		        <select class="form-control" id="order" th:field="*{order}" required>
+		            <option th:each="order : ${orders}"
+		                    th:value="${order}" 
+		                    th:text="'注文ID: ' + ${order.id} + ' / 顧客名: ' + ${order.customerName}">
+		            </option>
+		        </select>
+		    </div>
         <button type="submit" class="btn btn-success">作成</button>
         <a href="/shipments" class="btn btn-secondary">戻る</a>
     </form>
