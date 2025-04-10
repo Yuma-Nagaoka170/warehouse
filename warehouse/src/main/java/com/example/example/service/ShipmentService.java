@@ -32,5 +32,10 @@ public class ShipmentService {
 	public void deleteShipment(Long id) {
 		shipmentRepository.deleteById(id);
 	}
+	
+	public List<Shipment> findShipmentsByProductName(String productName) {
+	    return shipmentRepository.findByOrderProductNameContaining(productName);
+	}
+
 
 }

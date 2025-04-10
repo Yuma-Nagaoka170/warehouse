@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.example.entity.Shipment;
 import com.example.example.service.OrderService;
@@ -26,13 +27,6 @@ public class ShipmentController {
 
     public ShipmentController(ShipmentService shipmentService) {
         this.shipmentService = shipmentService;
-    }
-
-    @GetMapping
-    public String listShipments(Model model) {
-        List<Shipment> shipments = shipmentService.getAllShipments();
-        model.addAttribute("shipments", shipments);
-        return "shipment/list"; // HTML: templates/shipment/list.html
     }
 
     @GetMapping("/create")
@@ -53,5 +47,21 @@ public class ShipmentController {
         shipmentService.deleteShipment(id);
         return "redirect:/shipments";
     }
+    
+    @GetMapping
+    public String listShipments(@RequestParam(name = "productName", required = false) String productName, Model model) {
+        List<Shipment> shipments;
+
+        if (productName != null && !productName.isEmpty()) {
+            shipments = shipmentService.findShipmentsByProductName(productName);
+        } else {
+            shipments = shipmentService.getAllShipments();
+        }
+
+        model.addAttribute("shipments", shipments);
+        model.addAttribute("productName", productName); // 入力欄の保持用
+        return "shipment/list";
+    }
+
 }
 

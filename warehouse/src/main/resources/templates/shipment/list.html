@@ -11,6 +11,14 @@
 		
 		<a href="/shipments/create" class="btn btn-primary mb-3">新しい荷物を作成</a>
 		
+		<form method="get" action="/shipments" class="mb-3">
+		    <div class="input-group">
+		        <input type="text" class="form-control" name="productName" placeholder="商品名で検索" value="${productName}">
+		        <button type="submit" class="btn btn-outline-secondary">検索</button>
+		    </div>
+		</form>
+
+		
 		<table class="table table-striped">
 			<thead>
 				<tr>
