@@ -10,6 +10,11 @@
     <h1 class="mb-4">出荷作成</h1>
 
     <form action="/shipments/create" method="post" th:object="${shipment}">
+		<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		<div class="mb-3">
+		    <label for="shipmentDate" class="form-label">出荷日</label>
+		    <input type="date" class="form-control" id="shipmentDate" name="shipmentDate" required>
+		</div>
         <div class="mb-3">
             <label for="status" class="form-label">ステータス</label>
             <input type="text" class="form-control" id="status" th:field="*{status}" placeholder="例: SHIPPED">
@@ -18,11 +23,15 @@
 		        <label for="order" class="form-label">注文</label>
 		        <select class="form-control" id="order" th:field="*{order}" required>
 		            <option th:each="order : ${orders}"
-		                    th:value="${order}" 
+		                    th:value="${order.id}" 
 		                    th:text="'注文ID: ' + ${order.id} + ' / 顧客名: ' + ${order.customerName}">
 		            </option>
 		        </select>
 		    </div>
+			<div class="mb-3">
+			    <label for="trackingNumber" class="form-label">追跡番号</label>
+			    <input type="text" class="form-control" id="trackingNumber" name="trackingNumber" required>
+			</div>
         <button type="submit" class="btn btn-success">作成</button>
         <a href="/shipments" class="btn btn-secondary">戻る</a>
     </form>

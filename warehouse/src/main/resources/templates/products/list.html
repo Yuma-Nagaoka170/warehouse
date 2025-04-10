@@ -14,7 +14,6 @@
         <tr>
             <th>ID</th>
             <th>商品名</th>
-            <th>説明</th>
             <th>価格</th>
         </tr>
         </thead>
@@ -22,7 +21,6 @@
         <tr th:each="product : ${products}">
             <td th:text="${product.id}"></td>
             <td th:text="${product.name}"></td>
-            <td th:text="${product.description}"></td>
             <td th:text="${product.price}"></td>
         </tr>
         </tbody>

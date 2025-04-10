@@ -1,7 +1,7 @@
 package com.example.example.entity;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -57,9 +59,11 @@ public class Shipment {
         this.id = id;
     }
 
-    @Column(nullable = false)
-    private LocalDateTime shipmentDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate shipmentDate;
 
-    @Column(nullable = false)
+
+    @Column(name = "tracking_number", nullable = false)
     private String trackingNumber;
+
 }
