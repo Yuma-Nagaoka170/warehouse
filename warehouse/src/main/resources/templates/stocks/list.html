@@ -1,39 +1,59 @@
-
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>在庫一覧</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>リアルタイム在庫追跡</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container mt-4">
-    <h2 th:text="'倉庫: ' + ${warehouse.name} + ' の在庫一覧'"></h2>
-    <a th:href="@{/stocks/create}" class="btn btn-primary mb-3">在庫を追加</a>
-
-    <table class="table table-striped">
+<div class="container mt-5">
+    <h2>在庫一覧</h2>
+    <table class="table table-bordered" id="stockTable">
         <thead>
-        <tr>
-            <th>ID</th>
-            <th>商品名</th>
-            <th>在庫数</th>
-            <th>操作</th>
-        </tr>
+            <tr>
+                <th>商品ID</th>
+                <th>商品名</th>
+                <th>在庫数</th>
+            </tr>
         </thead>
         <tbody>
-        <tr th:each="stock : ${stocks}">
-            <td th:text="${stock.id}"></td>
-            <td th:text="${stock.product.name}"></td>
-            <td th:text="${stock.quantity}"></td>
-            <td>
-                <form th:action="@{|/stocks/delete/${stock.id}|}" method="post" style="display:inline;">
-                    <input type="hidden" name="warehouseId" th:value="${warehouse.id}" />
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('削除してよろしいですか？')">削除</button>
-                </form>
-            </td>
-        </tr>
+            <!-- Thymeleafで事前に在庫を表示する場合 -->
+            <tr th:each="product : ${products}" th:id="'product-' + ${product.id}">
+                <td th:text="${product.id}">1</td>
+                <td th:text="${product.name}">サンプル商品</td>
+                <td th:text="${product.stockQuantity}" class="stock-qty">10</td>
+            </tr>
         </tbody>
     </table>
 </div>
+
+<!-- SockJS & STOMP -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+
+<script>
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        // サーバー側で /topic/stock に通知を送ってくる
+        stompClient.subscribe('/topic/stock', function (message) {
+            const data = JSON.parse(message.body);
+            const productId = data.productId;
+            const newStock = data.stockQty;
+
+            // テーブルの該当行を探して在庫数を更新
+            const row = document.getElementById(`product-${productId}`);
+            if (row) {
+                const stockCell = row.querySelector('.stock-qty');
+                if (stockCell) {
+                    stockCell.textContent = newStock;
+                }
+            }
+        });
+    });
+</script>
 </body>
 </html>

@@ -34,7 +34,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authz -> 
                 authz
-                    .requestMatchers("/", "/products/**", "/stocks", "/orders", "/shipments/**", "/locations", "/css/**", "/js/**").permitAll()  // 公開ページ
+                    .requestMatchers("/", "/products/**", "/stocks", "/orders", "/shipments/**", "/locations/**", "/css/**", "/js/**").permitAll()  // 公開ページ
                     .anyRequest().authenticated()  // その他のリクエストは認証必須
             )
             .formLogin(form -> 
