@@ -54,4 +54,12 @@ public class StockController {
         stockService.deleteStock(id);
         return "redirect:/stocks/warehouse/" + warehouseId;
     }
+    
+    @PostMapping("/test-notify/{productId}")
+    public String testNotify(@PathVariable Long productId) {
+        // 仮の数量で更新（+1）
+        stockService.updateStock(productId, 1);
+        return "redirect:/stocks/warehouse/1"; // 固定値なら動的にするか必要なら工夫して
+    }
+
 }

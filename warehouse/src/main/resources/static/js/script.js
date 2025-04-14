@@ -44,4 +44,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+<script>
+    const socket = new SockJS('/ws');
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function () {
+        stompClient.subscribe('/topic/inventory', function (message) {
+            const data = JSON.parse(message.body);
+            alert("商品ID: " + data.productId + " の在庫が " + data.quantity + " に更新されました！");
+            // 必要に応じてDOMを更新する処理を書く
+        });
+    });
+</script>
+
 

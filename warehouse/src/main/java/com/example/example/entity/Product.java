@@ -86,6 +86,16 @@ public class Product {
 
     @Column(nullable = false)
     private double price;
+
+	public int getQuantity() {
+		// TODO 自動生成されたメソッド・スタブ
+		return 0;
+	}
+
+	public void setQuantity(int i) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
 }
 
 
