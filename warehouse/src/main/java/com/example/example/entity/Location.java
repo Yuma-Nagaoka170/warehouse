@@ -29,4 +29,8 @@ public class Location {
 
     public Location getParent() { return parent; }
     public void setParent(Location parent) { this.parent = parent; }
+	public Location orElseThrow(Object object) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }

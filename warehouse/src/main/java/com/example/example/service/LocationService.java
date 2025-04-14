@@ -25,5 +25,26 @@ public class LocationService {
     public void deleteLocation(Long id) {
         locationRepository.deleteById(id);
     }
+  
+
+    public void save(Location location) {
+        locationRepository.save(location);
+    }
+
+    public List<Location> getTopLocations() {
+        return locationRepository.findByParentIsNull();
+    }
+
+	public List<Location> getRootLocations() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public Location getLocationById(Long parentId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+    
 }
 

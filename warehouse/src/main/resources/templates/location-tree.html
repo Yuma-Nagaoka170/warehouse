@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ロケーション階層</title>
+    <style>
+        ul { list-style-type: none; padding-left: 20px; }
+        .toggle { cursor: pointer; font-weight: bold; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+<h1>ロケーションツリー</h1>
+
+<ul>
+    <li th:each="loc : ${locations}">
+        <div class="toggle" th:text="${loc.name}" onclick="toggleChildren(this)"></div>
+        <ul class="hidden" th:if="${loc.children != null}" th:each="child : ${loc.children}">
+            <li th:text="${child.name}"></li>
+            <!-- さらに子がある場合はここにネストしていく -->
+        </ul>
+    </li>
+</ul>
+
+<script>
+    function toggleChildren(element) {
+        const childList = element.nextElementSibling;
+        if (childList) {
+            childList.classList.toggle('hidden');
+        }
+    }
+</script>
+
+</body>
+</html>

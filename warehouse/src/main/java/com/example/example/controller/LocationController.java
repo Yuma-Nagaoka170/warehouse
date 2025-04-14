@@ -45,5 +45,31 @@ public class LocationController {
         locationService.deleteLocation(id);
         return "redirect:/locations";
     }
+    
+    @GetMapping("/{id}/edit")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Location location = locationService.getLocationById(id).orElseThrow(() -> new IllegalArgumentException("Invalid location ID"));
+        model.addAttribute("location", location);
+        return "locations/edit";
+    }
+
+    @PostMapping("/{id}/edit")
+    public String updateLocation(@PathVariable Long id, @ModelAttribute Location updatedLocation) {
+        Location existing = locationService.getLocationById(id).orElseThrow(() -> new IllegalArgumentException("Invalid location ID"));
+        existing.setName(updatedLocation.getName());
+        locationService.saveLocation(existing);
+        return "redirect:/location-tree";
+    }
+
+    @PostMapping("/{parentId}/add-child")
+    public String addChildLocation(@PathVariable Long parentId, @ModelAttribute Location newLocation) {
+        Location parent = locationService.getLocationById(parentId).orElseThrow(() -> new IllegalArgumentException("Invalid parent ID"));
+        newLocation.setParent(parent);
+        locationService.saveLocation(newLocation);
+        return "redirect:/location-tree";
+    }
+
+
+
 }
 
