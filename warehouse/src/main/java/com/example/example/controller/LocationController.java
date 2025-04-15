@@ -1,6 +1,8 @@
 package com.example.example.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,6 +70,19 @@ public class LocationController {
         locationService.saveLocation(newLocation);
         return "redirect:/location-tree";
     }
+    
+    @GetMapping("/location-tree")
+    public String showLocationTree(Model model) {
+        List<Location> locations = locationService.getTopLocations();
+        Map<Long, Integer> stockSummary = new HashMap<>();
+        for (Location location : locations) {
+            stockSummary.put(location.getId(), stockService.getTotalQuantityByLocationId(location.getId()));
+        }
+        model.addAttribute("locations", locations);
+        model.addAttribute("stockSummary", stockSummary);
+        return "locations/tree";
+    }
+
 
 
 

@@ -31,5 +31,35 @@
     }
 </script>
 
+<style>
+    .toggle-button {
+        cursor: pointer;
+        margin-right: 5px;
+        color: blue;
+    }
+
+    .child-location {
+        margin-left: 20px;
+        display: none;
+    }
+</style>
+
+<script>
+    function toggleChildren(id) {
+        const children = document.querySelectorAll('.parent-' + id);
+        children.forEach(child => {
+            child.style.display = (child.style.display === 'none' ? 'block' : 'none');
+        });
+
+        const toggleBtn = document.getElementById('toggle-' + id);
+        if (toggleBtn.textContent === '▶') {
+            toggleBtn.textContent = '▼';
+        } else {
+            toggleBtn.textContent = '▶';
+        }
+    }
+</script>
+
+
 </body>
 </html>

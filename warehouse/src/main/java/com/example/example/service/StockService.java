@@ -54,6 +54,12 @@ public class StockService {
     public void deleteStock(Long id) {
         stockRepository.deleteById(id);
     }
+    
+    public Integer getTotalQuantityByLocationId(Long locationId) {
+        Integer total = stockRepository.getTotalQuantityByLocationId(locationId);
+        return total != null ? total : 0;
+    }
+
 
 
 }

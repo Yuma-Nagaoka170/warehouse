@@ -29,6 +29,23 @@
             </tr>
         </tbody>
     </table>
+	<ul>
+	    <li th:each="location : ${locations}">
+	        <span class="toggle-button" th:id="'toggle-' + ${location.id}"
+	              th:text="'▶'" th:onclick="'toggleChildren(' + ${location.id} + ')'">
+	        </span>
+	        <span th:text="${location.name}">ロケーション名</span>
+
+	        <ul th:each="child : ${location.children}" 
+	            th:class="'child-location parent-' + ${location.id}" 
+	            style="display: none;">
+	            <li>
+	                <span th:text="${child.name}">子ロケーション名</span>
+	            </li>
+	        </ul>
+	    </li>
+	</ul>
+
 	<a href="/" class="btn btn-secondary">トップに戻る</a>
 </div>
 </body>
