@@ -12,13 +12,19 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.example.entity.Location;
 import com.example.example.service.LocationService;
+import com.example.example.service.StockService;
 
 @Controller
 @RequestMapping("/locations")
 public class LocationController {
+	
+	@Autowired
+	private StockService stockService;
+
 
     @Autowired
     private LocationService locationService;
@@ -82,6 +88,14 @@ public class LocationController {
         model.addAttribute("stockSummary", stockSummary);
         return "locations/tree";
     }
+    
+    @PostMapping("/add")
+    public String addLocation(@ModelAttribute Location newLocation, @RequestParam(required = false) Long parentId) {
+        locationService.getLocationById(parentId).ifPresent(newLocation::setParent);
+        locationService.saveLocation(newLocation);
+        return "redirect:/location-tree";
+    }
+
 
 
 

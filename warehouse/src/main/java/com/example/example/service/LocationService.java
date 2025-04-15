@@ -38,8 +38,9 @@ public class LocationService {
     public List<Location> getRootLocations() {
         return locationRepository.findByParentIsNull();
     }
-
+    
     public Optional<Location> getLocationById(Long id) {
         return locationRepository.findById(id);
     }
+
 }

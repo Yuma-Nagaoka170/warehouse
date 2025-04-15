@@ -31,11 +31,9 @@ public class LocationTreeController {
 
     @PostMapping("/add")
     public String addLocation(@ModelAttribute Location newLocation, @RequestParam(required = false) Long parentId) {
-    	Location parent = locationService.getLocationById(parentId);
-    	if (parent != null) {
-    	    newLocation.setParent(parent);
-    	}
-
+        if (parentId != null) {
+            locationService.getLocationById(parentId).ifPresent(newLocation::setParent);
+        }
         locationService.saveLocation(newLocation);
         return "redirect:/location-tree";
     }

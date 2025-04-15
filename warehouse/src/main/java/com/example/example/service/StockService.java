@@ -59,6 +59,8 @@ public class StockService {
         Integer total = stockRepository.getTotalQuantityByLocationId(locationId);
         return total != null ? total : 0;
     }
+ 
+
 
 
 

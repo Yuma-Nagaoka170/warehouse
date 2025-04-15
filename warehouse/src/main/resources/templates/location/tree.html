@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ロケーションツリーと在庫数</title>
+    <style>
+        ul {
+            list-style-type: none;
+            padding-left: 1rem;
+        }
+        .location-node {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ロケーションツリーと在庫集計</h1>
+
+    <ul>
+        <li th:each="location : ${locations}">
+            <div class="location-node">
+                <span th:text="${location.name}">ロケーション名</span>
+                ：<strong th:text="${stockSummary[location.id]} ?: 0"></strong> 個
+                <div th:insert="~{::children(location)}"></div>
+            </div>
+        </li>
+    </ul>
+
+    <!-- 子ロケーションの再帰表示テンプレート -->
+    <th:block th:fragment="children(parent)">
+        <ul th:if="${parent.children}">
+            <li th:each="child : ${parent.children}">
+                <div class="location-node">
+                    <span th:text="${child.name}">子ロケーション</span>
+                    ：<strong th:text="${stockSummary[child.id]} ?: 0"></strong> 個
+                    <div th:insert="~{::children(child)}"></div>
+                </div>
+            </li>
+        </ul>
+    </th:block>
+</body>
+</html>

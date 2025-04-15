@@ -1,5 +1,6 @@
 package com.example.example.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,6 +16,9 @@ public interface StockRepository extends JpaRepository<Stock, Long> {
 
 	@Query("SELECT SUM(s.quantity) FROM Stock s WHERE s.warehouse.location.id = :locationId")
 	Integer getTotalQuantityByLocationId(@Param("locationId") Long locationId);
+	
+	List<Stock> findByLocationId(Long locationId);
+
 
 }
 

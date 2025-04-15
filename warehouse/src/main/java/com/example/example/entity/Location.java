@@ -1,11 +1,16 @@
 package com.example.example.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -33,5 +38,9 @@ public class Location {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
+	
+	@OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<LocationAttribute> attributes = new ArrayList<>();
+
 	}
 
