@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>設備追加</title>
+</head>
+<body>
+    <h1>設備を追加</h1>
+
+    <form th:action="@{/equipments/create}" th:object="${equipment}" method="post">
+        <div>
+            <label>設備名:</label>
+            <input type="text" th:field="*{name}" required />
+        </div>
+        <div>
+            <label>タイプ:</label>
+            <input type="text" th:field="*{type}" required />
+        </div>
+        <div>
+            <label>ロケーション:</label>
+            <select th:field="*{location}" required>
+                <option th:each="loc : ${locations}" th:value="${loc}" th:text="${loc.name}">ロケーション</option>
+            </select>
+        </div>
+        <button type="submit">追加</button>
+    </form>
+
+    <a href="/equipments">←戻る</a>
+</body>
+</html>
