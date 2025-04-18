@@ -1,11 +1,16 @@
 package com.example.example.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Equipment {
@@ -23,7 +28,21 @@ public class Equipment {
     @ManyToOne
     @JoinColumn(name = "location_id")
     private Location location;
+    
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
+    private List<Inspection> insepections = new ArrayList<>();
+    
+    @OneToMany(mappedBy = "equipment", cascade = CascadeType.ALL)
+    private List<Inspection> inspections = new ArrayList<>();
 
+    
+    public List<Inspection> getInspections(){
+    	return inspections;
+    }
+    
+    public void setInspections(List<Inspection> inspections) {
+    	this.insepections = inspections;
+    }
     // Getters & Setters
     public Long getId() { return id; }
 

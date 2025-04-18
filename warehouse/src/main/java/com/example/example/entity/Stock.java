@@ -21,6 +21,10 @@ public class Stock {
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
+    
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
 
     private int quantity;
 

@@ -14,7 +14,6 @@
             <tr>
                 <th>ID</th>
                 <th>名称</th>
-                <th>説明</th>
                 <th>操作</th>
             </tr>
         </thead>
@@ -22,7 +21,7 @@
             <tr th:each="location : ${locations}">
                 <td th:text="${location.id}"></td>
                 <td th:text="${location.name}"></td>
-                <td th:text="${location.description}"></td>
+                <!--td th:text="${location.description}"></td-->
                 <td>
                     <a th:href="@{'/locations/delete/' + ${location.id}}" class="btn btn-danger btn-sm">削除</a>
                 </td>
@@ -36,13 +35,7 @@
 	        </span>
 	        <span th:text="${location.name}">ロケーション名</span>
 
-	        <ul th:each="child : ${location.children}" 
-	            th:class="'child-location parent-' + ${location.id}" 
-	            style="display: none;">
-	            <li>
-	                <span th:text="${child.name}">子ロケーション名</span>
-	            </li>
-	        </ul>
+        
 	    </li>
 	</ul>
 
