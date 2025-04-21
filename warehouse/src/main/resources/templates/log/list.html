@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>ログ履歴</title></head>
+<body>
+    <h1>ログ履歴</h1>
+    <table>
+        <thead>
+            <tr><th>日時</th><th>ユーザー</th><th>アクション</th><th>詳細</th></tr>
+        </thead>
+        <tbody>
+            <tr th:each="log : ${logs}">
+                <td th:text="${#temporals.format(log.timestamp, 'yyyy-MM-dd HH:mm')}"></td>
+                <td th:text="${log.username}"></td>
+                <td th:text="${log.action}"></td>
+                <td th:text="${log.description}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
