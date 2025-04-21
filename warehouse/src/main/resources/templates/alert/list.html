@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>アラート一覧</title></head>
+<body>
+    <h1>現在のアラート</h1>
+    <table>
+        <tr><th>メッセージ</th><th>種別</th><th>発生日時</th><th>操作</th></tr>
+        <tr th:each="alert : ${alerts}">
+            <td th:text="${alert.message}">Message</td>
+            <td th:text="${alert.type}">Type</td>
+            <td th:text="${#temporals.format(alert.createdAt, 'yyyy-MM-dd HH:mm')}">Date</td>
+            <td>
+                <form th:action="@{'/alerts/resolve/' + ${alert.id}}" method="post">
+                    <button type="submit">解決済みにする</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

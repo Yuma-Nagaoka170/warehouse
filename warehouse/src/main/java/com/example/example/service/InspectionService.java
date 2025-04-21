@@ -10,20 +10,33 @@ import com.example.example.repository.InspectionRepository;
 
 @Service
 public class InspectionService {
-	
-	@Autowired
-	private InspectionRepository inspectionRepository;
 
-	public List<Inspection> getAllInspections(){
-		return inspectionRepository.findAll();
-	}
+    @Autowired
+    private InspectionRepository inspectionRepository;
+
+    public List<Inspection> getAllInspections() {
+        return inspectionRepository.findAll();
+    }
+
+    public List<Inspection> getInspectionsByEquipmentId(Long equipmentId) {
+        return inspectionRepository.findByEquipmentId(equipmentId);
+    }
+
+    public void saveInspection(Inspection inspection) {
+        inspectionRepository.save(inspection);
+    }
+
+    public Inspection getInspectionById(Long id) {
+        return inspectionRepository.findById(id).orElse(null);
+    }
+
+    public void deleteInspection(Long id) {
+        inspectionRepository.deleteById(id);
+    }
 	
-	public void saveInspection(Inspection inspection) {
-		inspectionRepository.save(inspection);
-	}
-	
-	public List<Inspection> getInspectionByEquipmentId(Long equipmentId){
-		return inspectionRepository.findByEquipmentId(equipmentId);
-	}
+    public List<Inspection> getRecentInspections() {
+        return inspectionRepository.findTop5ByOrderByInspectionDateDesc();
+    }
+
 
 }

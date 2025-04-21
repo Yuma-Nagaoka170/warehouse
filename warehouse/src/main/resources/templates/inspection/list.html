@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>点検記録一覧</title>
+</head>
+<body>
+	<h1>点検記録一覧</h1>
+	<a href="/inspections/add">点検記録を追加</a>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>設備名</th>
+			<th>点検日</th>
+			<th>点検内容</th>
+		</tr>
+		<tr th:each="inspection : ${inspections}">
+			<td th:text="${inspection.id}"></td>
+			<td th:text="${inspection.equipment.name}"></td>
+			<td th:text="${inspection.date}"></td>
+			<td th:text="${inspection.details}"></td>
+		</tr>
+	</table>
+
+</body>
+</html>

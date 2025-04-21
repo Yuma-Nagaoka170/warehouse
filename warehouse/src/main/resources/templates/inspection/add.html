@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>点検記録追加</title>
+</head>
+<body>
+<h1>点検記録を追加</h1>
+<form action="#" th:action="@{/inspections/add}" th:object="${inspection}" method="post">
+    <label>設備：</label>
+    <select th:field="*{equipment}">
+        <option th:each="equipment : ${equipmentList}" 
+                th:value="${equipment}" 
+                th:text="${equipment.name}">設備名</option>
+    </select><br/>
+
+    <label>点検日：</label>
+    <input type="date" th:field="*{date}" /><br/>
+
+    <label>点検内容：</label>
+    <textarea th:field="*{details}"></textarea><br/>
+
+    <button type="submit">保存</button>
+</form>
+</body>
+</html>
