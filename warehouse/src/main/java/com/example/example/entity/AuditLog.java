@@ -20,6 +20,31 @@ public class AuditLog {
 
     private LocalDateTime timestamp;
 
+	public void setUsername(String username2) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	public void setAction(String action2) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	public void setEntity(String entity2) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	public void setEntityId(String entityId2) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
+	public void setTimestamp(LocalDateTime now) {
+		// TODO 自動生成されたメソッド・スタブ
+		
+	}
+
     // getter/setter省略
 }
 
