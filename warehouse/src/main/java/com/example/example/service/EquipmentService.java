@@ -34,4 +34,9 @@ public class EquipmentService {
     public List<Equipment> getByLocationId(Long locationId) {
         return equipmentRepository.findByLocationId(locationId);
     }
+
+	public Equipment getById(Long equipmentId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
