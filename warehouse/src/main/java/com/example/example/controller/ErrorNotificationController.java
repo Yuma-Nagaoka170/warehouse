@@ -6,19 +6,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.example.service.AuditLogService;
+import com.example.example.service.ErrorNotificationService;
 
 @Controller
-@RequestMapping("/audit-logs")
-public class AuditLogController {
+@RequestMapping("/errors")
+public class ErrorNotificationController {
 
     @Autowired
-    private AuditLogService auditLogService;
+    private ErrorNotificationService service;
 
     @GetMapping
-    public String listLogs(Model model) {
-        model.addAttribute("logs", auditLogService.getAllLogs());
-        return "log/list";
+    public String listErrors(Model model) {
+        model.addAttribute("errors", service.getAllErrors());
+        return "error/list";
     }
 }
 

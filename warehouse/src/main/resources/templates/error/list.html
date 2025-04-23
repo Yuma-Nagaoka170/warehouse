@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>エラー通知一覧</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>エラー通知一覧</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>発生日時</th>
+            <th>エラーメッセージ</th>
+            <th>詳細</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="error : ${errors}">
+            <td th:text="${#temporals.format(error.occurredAt, 'yyyy-MM-dd HH:mm:ss')}"></td>
+            <td th:text="${error.message}"></td>
+            <td>
+                <pre th:text="${error.stackTrace}" style="max-height: 200px; overflow: auto;"></pre>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
