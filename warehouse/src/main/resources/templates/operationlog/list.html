@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>操作ログ一覧</title>
+</head>
+<body>
+	<h1>操作ログ一覧</h1>
+	
+	<form th:action="@{/operation-logs/add}" method="post">
+		<label>操作内容: <input type="text" name="operation"/></label><br/>
+		<label>操作者: <input type="text" name="operator"/></label><br/>
+		<button type="submit">登録</button>
+	</form>
+	
+	<hr/>
+	
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>操作内容</th>
+			<th>操作者</th>
+			<th>日時</th>
+		</tr>
+		<tr th:each="log : ${logs}">
+			<td th:text="${log.id}"></td>
+			<td th:text="${log.operation}"></td>
+			<td th:text="${log.operator}"></td>
+			<td th:text="${log.timestamp}"></td>
+		</tr>
+		<tr th:each="log : ${logs}">
+			<td th:text="${log.id}"></td>
+			<td th:text="${log.operation}"></td>
+			<td th:text="${log.operator}"></td>
+			<td th:text="${log.timestamp}"></td>
+			<td>
+				<form th:action="@{'/operation-logs/delete/' + ${log.id}}" method="post"
+				onsubmit="return confirm('本当に削除しますか？');">
+				<button type="submit">削除</button>
+				</form>
+			</td>
+		</tr>
+	</table>
+
+</body>
+</html>

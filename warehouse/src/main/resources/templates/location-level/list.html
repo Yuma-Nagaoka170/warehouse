@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ロケーション階層管理</title>
+</head>
+<body>
+	<h2>ロケーションクラス一覧</h2>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>順番</th>
+				<th>名前</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="level : ${levels}">
+				<td th:text="${level/orderNumber}">順番</td>
+				<td th:text="${level.name}">名前</td>
+			</tr>
+		</tbody>
+	</table>
+	
+	<h3>新しいロケーションクラスを追加</h3>
+	<form th:action="@{/location-levels/add}" method="post" th:object="${levelForm}">
+		名前: <input type="text" th:field="*{name}" /><br/>
+		表示順: <input type="number" th:field="*{orderNumber}" /><br/>
+		<button type="submit">追加</button>
+		</form>
+
+</body>
+</html>
