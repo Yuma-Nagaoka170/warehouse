@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>温湿度モニタリング</title>
+</head>
+<body>
+	<h1>温湿度モニタリング一覧</h1>
+	<table border="1">
+		<tr>
+			<th>ID</th>
+			<th>ロケーション</th>
+			<th>温度（℃）</th>
+			<th>湿度(%)</th>
+			<th>記録日時</th>
+		</tr>
+		<tr th:each="m : ${monitors}">
+			<td th:text="${m.id}"></td>
+			<td th:text="${m.location.name}"></td>
+			<td th:text="${m.temprature}"></td>
+			<td th:text="${m.humidty}"></td>
+			<td th:text="${#temporals.format(m.recordeAt, 'yyyy-MM-dd HH:mm')}"></td>
+		</tr>
+	</table>
+	
+	<h2>新しい記録を追加</h2>
+	<form th:action="@{/environment/record}" method="post">
+		<label>温度（℃）:<input type="number" name="temprature" step="0.1" required /></label><br>
+		<label>湿度（％）:<input type="number" name="humidity" step="0.1" required /></label><br>
+		<label>ロケーションID:<input type="number" name="locationId" required /></label><br>
+		<button type="submit">記録</button>
+	</form>
+				
+
+</body>
+</html>

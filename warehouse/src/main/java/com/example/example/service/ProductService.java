@@ -25,5 +25,10 @@ public class ProductService {
     public Product getProductById(Long id) {
         return productRepository.findById(id).orElse(null);
     }
+
+	public Object getAll() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 

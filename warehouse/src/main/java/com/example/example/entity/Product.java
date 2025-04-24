@@ -96,6 +96,11 @@ public class Product {
 		// TODO 自動生成されたメソッド・スタブ
 		
 	}
+
+	public Object getStockQuantity() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>棚卸記録</title></head>
+<body>
+<h1>棚卸を記録</h1>
+<form th:action="@{/audits}" method="post">
+    <label>商品:
+        <select name="productId">
+            <option th:each="p : ${products}" th:value="${p.id}" th:text="${p.name}"></option>
+        </select>
+    </label><br>
+    <label>実際の在庫数: <input type="number" name="actualQuantity" required></label><br>
+    <label>監査者名: <input type="text" name="auditor" required></label><br>
+    <button type="submit">記録</button>
+</form>
+</body>
+</html>

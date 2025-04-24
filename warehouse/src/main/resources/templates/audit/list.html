@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head><title>棚卸記録</title></head>
+<body>
+	<h1>棚卸記録一覧</h1>
+	<table border="1">
+	    <tr>
+	        <th>ID</th>
+	        <th>商品名</th>
+	        <th>実数</th>
+	        <th>システム数</th>
+	        <th>監査日時</th>
+	        <th>監査者</th>
+	    </tr>
+	    <tr th:each="audit : ${audits}">
+	        <td th:text="${audit.id}"></td>
+	        <td th:text="${audit.product.name}"></td>
+	        <td th:text="${audit.actualQuantity}"></td>
+	        <td th:text="${audit.systemQuantity}"></td>
+	        <td th:text="${#temporals.format(audit.auditedAt, 'yyyy-MM-dd HH:mm')}"></td>
+	        <td th:text="${audit.auditor}"></td>
+	    </tr>
+	</table>
+
+</body>
+</html>

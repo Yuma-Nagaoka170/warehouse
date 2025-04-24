@@ -30,5 +30,10 @@ public class UserService {
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
+
+	public User findByUsername(String username) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 
