@@ -1,0 +1,24 @@
+<!-- equipment-status/status.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>設備稼働状況</title>
+</head>
+<body>
+    <h1>設備稼働状況</h1>
+    <p>現在の状態: <span th:text="${status.status}"></span></p>
+    <p>最終更新時刻: <span th:text="${status.statusChangeTime}"></span></p>
+
+    <form action="/equipment-status/change-status" method="post">
+        <input type="hidden" name="equipmentId" th:value="${status.equipment.id}">
+        <label for="status">状態変更:</label>
+        <select name="status">
+            <option value="稼働中">稼働中</option>
+            <option value="停止中">停止中</option>
+        </select>
+        <button type="submit">状態変更</button>
+    </form>
+</body>
+</html>
