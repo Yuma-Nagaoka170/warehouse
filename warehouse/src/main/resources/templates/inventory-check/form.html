@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>棚卸し入力</title>
+</head>
+<body>
+<h2>棚卸し入力</h2>
+<form th:action="@{/inventory-check/submit}" method="post">
+    <div>
+        <label>商品:</label>
+        <select name="productId" required>
+            <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label>理論在庫:</label>
+        <input type="number" name="theoreticalStock" required>
+    </div>
+    <div>
+        <label>実在庫:</label>
+        <input type="number" name="actualStock" required>
+    </div>
+    <div>
+        <button type="submit">保存</button>
+    </div>
+</form>
+</body>
+</html>

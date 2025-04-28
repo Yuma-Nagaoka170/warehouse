@@ -30,5 +30,15 @@ public class ProductService {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
+
+	public Object findAll() {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
+
+	public Product findById(Long productId) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
 
